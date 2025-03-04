@@ -47,7 +47,7 @@ class BoardingHouseRepository implements BoardingHouseService
 
     function getBoardingHouseBySlug($slug)
     {
-        return BoardingHouse::where('slug',  'like',  '%' . $slug . '%');
+        return BoardingHouse::where('slug',  'like',  '%' . $slug . '%')->first();
     }
 
     function getPopularBoardingHouses($limit = 5)

@@ -54,7 +54,7 @@ class BoardingHouseResource extends Resource
                                 Select::make('category_id')
                                     ->relationship(name: 'category', titleAttribute: 'name')
                                     ->required(),
-                                RichEditor::make('description')
+                                TextArea::make('description')
                                     ->required(),
                                 TextInput::make('price')
                                     ->prefix('IDR')
@@ -97,10 +97,19 @@ class BoardingHouseResource extends Resource
                                             ->numeric()
                                             ->required(),
                                         Toggle::make('is_available')
-                                            ->required()
-                                    ])
+                                            ->required(),
+                                        Repeater::make('roomImages')
+                                            ->relationship()
+                                            ->schema([
+                                                FileUpload::make('image')
+                                                    ->image()
+                                                    ->directory('room-images')
+                                                    ->required(),
+                                            ])
+                                    ]),
                             ]),
-                    ])->columnSpan(2)
+                    ])
+                    ->columnSpan(2)
             ]);
     }
 

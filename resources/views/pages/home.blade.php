@@ -22,7 +22,7 @@
 
             @foreach ($categories as $category)
                 <div class="swiper-slide !w-fit pb-[30px]">
-                    <a href="categories.html" class="card">
+                    <a href="{{ route('category', ['slug' => $category->slug]) }}" class="card">
                         <div
                             class="flex flex-col items-center w-[120px] shrink-0 rounded-[40px] p-4 pb-5 gap-3 bg-white shadow-[0px_12px_30px_0px_#0000000D] text-center">
                             <div class="w-[70px] h-[70px] rounded-full flex shrink-0 overflow-hidden">
@@ -57,7 +57,7 @@
 
                 @foreach ($popularBoardingHouses as $popularBoardingHouse)
                     <div class="swiper-slide !w-fit">
-                        <a href="details.html" class="card">
+                        <a href="{{ route('detail', ['slug' => $popularBoardingHouse->slug]) }}" class="card">
                             <div
                                 class="flex flex-col w-[250px] shrink-0 rounded-[30px] border border-[#F1F2F6] p-4 pb-5 gap-[10px] hover:border-[#91BF77] transition-all duration-300">
                                 <div class="flex w-full h-[150px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
@@ -83,12 +83,12 @@
                                         <img src="{{ asset('assets/images/icons/profile-2user.svg') }}"
                                             class="w-5 h-5 flex shrink-0" alt="icon">
                                         <p class="text-sm text-ngekos-grey">
-                                            {{ $popularBoardingHouse->rooms()->find($popularBoardingHouse->id)->capacity }}
+                                            {{ $popularBoardingHouse->rooms()->sum('capacity') }}
                                             People
                                         </p>
                                     </div>
                                     <hr class="border-[#F1F2F6]">
-                                    <p class="font-semibold text-lg text-ngekos-orange">Rp
+                                    <p class="font-semibold text-lg text-ngekos-orange">Rp.
                                         {{ number_format(num: $popularBoardingHouse->price, thousands_separator: '.') }}<span
                                             class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
                                 </div>
@@ -115,7 +115,7 @@
         <div class="grid grid-cols-2 gap-4">
 
             @foreach ($cities as $city)
-                <a href="cities.html" class="card">
+                <a href="{{ route('city', ['slug' => $city->slug]) }}" class="card">
                     <div
                         class="flex items-center rounded-[22px] p-[10px] gap-3 bg-white border border-white overflow-hidden hover:border-[#91BF77] transition-all duration-300">
                         <div
@@ -146,7 +146,7 @@
         </div>
         <div class="flex flex-col gap-4">
             @foreach ($boardingHouses as $boardingHouse)
-                <a href="details.html" class="card">
+                <a href="{{ route('detail', ['slug' => $boardingHouse->slug]) }}" class="card">
                     <div
                         class="flex rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white hover:border-[#91BF77] transition-all duration-300">
                         <div class="flex w-[120px] h-[183px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
@@ -166,10 +166,10 @@
                                 <img src="{{ asset('assets/images/icons/profile-2user.svg') }}"
                                     class="w-5 h-5 flex shrink-0" alt="icon">
                                 <p class="text-sm text-ngekos-grey">
-                                    {{ $boardingHouse->rooms()->find($boardingHouse->id)->capacity }} People</p>
+                                    {{ $boardingHouse->rooms()->sum('capacity') }} People</p>
                             </div>
                             <hr class="border-[#F1F2F6]">
-                            <p class="font-semibold text-lg text-ngekos-orange">Rp
+                            <p class="font-semibold text-lg text-ngekos-orange">Rp.
                                 {{ number_format(num: $boardingHouse->price, thousands_separator: '.') }}<span
                                     class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
                         </div>

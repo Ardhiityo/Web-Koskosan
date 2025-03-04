@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
-    public function check()
+    public function index()
     {
         return view('pages.check-booking');
     }
