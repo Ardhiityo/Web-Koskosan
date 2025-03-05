@@ -21,8 +21,19 @@ Route::controller(BoardingHouseController::class)->group(function () {
     });
 });
 
-Route::get('/check-booking', [BookingController::class, 'index'])
-    ->name('check-booking');
+Route::controller(BookingController::class)->group(function () {
+    Route::get('/check-booking', 'index')
+        ->name('check-booking');
+
+    Route::post('/room-booking',   'roomBooking')
+        ->name('room-booking');
+
+    Route::post('/customer-booking',   'bookingDetail')
+        ->name('customer-booking');
+
+    Route::post('/checkout',   'checkout')
+        ->name('checkout');
+});
 
 Route::get('/city/{slug}', [CityController::class, 'index'])
     ->name('city');

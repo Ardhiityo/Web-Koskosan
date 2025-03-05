@@ -55,4 +55,9 @@ class BoardingHouseRepository implements BoardingHouseService
         return BoardingHouse::withCount('transactions')
             ->orderByDesc('transactions_count')->get();
     }
+
+    function getBoardingHouseById($id)
+    {
+        return BoardingHouse::find($id);
+    }
 }

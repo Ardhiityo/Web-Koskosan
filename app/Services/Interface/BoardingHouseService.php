@@ -9,4 +9,5 @@ interface BoardingHouseService
     public function getBoardingHouseByCitySlug($slug);
     public function getBoardingHouseByCategorySlug($slug);
     public function getBoardingHouseBySlug($slug);
+    public function getBoardingHouseById($id);
 }

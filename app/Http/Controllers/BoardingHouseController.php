@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BoardingHouse;
 use Illuminate\Http\Request;
+use App\Models\BoardingHouse;
 use App\Services\Interface\CityService;
 use App\Services\Interface\CategoryService;
 use App\Services\Interface\BoardingHouseService;
+use App\Services\Interface\RoomService;
 
 class BoardingHouseController extends Controller
 {
     public function __construct(
         private CategoryService $categoryRepository,
         private BoardingHouseService $boardingHouseRepository,
-        private CityService $cityRepository
+        private CityService $cityRepository,
+        private RoomService $roomRepository
     ) {}
 
     public function index()
