@@ -7,7 +7,7 @@
         class="absolute top-0 w-full h-[230px] rounded-b-[75px] bg-[linear-gradient(180deg,#F2F9E6_0%,#D2EDE4_100%)]">
     </div>
     <div id="TopNav" class="relative flex items-center justify-between px-5 mt-[60px]">
-        <a href="{{ route('room-available', ['slug' => $boardingHouse->slug]) }}"
+        <a href="{{ route('room-booking') }}"
             class="w-12 h-12 flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-white">
             <img src="{{ asset('assets/images/icons/arrow-left.svg') }}" class="w-[28px] h-[28px]" alt="icon">
         </a>
@@ -53,12 +53,12 @@
                     <div class="flex items-center gap-[6px]">
                         <img src="{{ asset('assets/images/icons/3dcube.svg') }}" class="w-5 h-5 flex shrink-0"
                             alt="icon">
-                        <p class="text-sm text-ngekos-grey">{{ $room->square_feet }} sqft flat</p>
+                        <p class="text-sm text-ngekos-grey">{{ $room->square_feet }} square feet</p>
                     </div>
                     <hr class="border-[#F1F2F6]">
                     <p class="font-semibold text-lg text-ngekos-orange">Rp
                         {{ number_format($room->price_per_month, thousands_separator: '.') }}<span
-                            class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
+                            class="text-sm text-ngekos-grey font-normal">/month</span></p>
                 </div>
             </div>
         </div>

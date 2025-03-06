@@ -18,7 +18,7 @@ class BoardingHouseController extends Controller
         private RoomService $roomRepository
     ) {}
 
-    public function index()
+    public function find()
     {
         $cities = $this->cityRepository->getAllCities();
 
@@ -27,16 +27,7 @@ class BoardingHouseController extends Controller
         return view('pages.boarding-house.find', compact('cities', 'categories'));
     }
 
-    public function show($slug)
-    {
-        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
-
-        $averageRating = BoardingHouse::find($boardingHouse->id)->testimonials()->avg('rating');
-
-        return view('pages.boarding-house.show', compact('boardingHouse', 'averageRating'));
-    }
-
-    public function store(Request $request)
+    public function findResult(Request $request)
     {
         $boardingHouses = $this->boardingHouseRepository->getAllBoardingHouses(
             search: $request->name,
@@ -44,13 +35,22 @@ class BoardingHouseController extends Controller
             category: $request->category
         );
 
-        return view('pages.boarding-house.store', compact('boardingHouses'));
+        return view('pages.boarding-house.find-result', compact('boardingHouses'));
     }
 
-    public function room($slug)
+    public function roomDetail($slug)
     {
         $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
 
-        return view('pages.boarding-house.room', compact('boardingHouse'));
+        $averageRating = BoardingHouse::find($boardingHouse->id)->testimonials()->avg('rating');
+
+        return view('pages.boarding-house.detail', compact('boardingHouse', 'averageRating'));
+    }
+
+    public function roomAvailable($slug)
+    {
+        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
+
+        return view('pages.boarding-house.room-available', compact('boardingHouse'));
     }
 }

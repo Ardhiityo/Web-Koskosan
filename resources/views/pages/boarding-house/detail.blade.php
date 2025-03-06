@@ -157,7 +157,7 @@
                 <p class="font-bold text-xl leading-[30px] text-white">
                     Rp. {{ number_format($boardingHouse->price, thousands_separator: '.') }}
                     <br>
-                    <span class="text-sm font-normal">/bulan</span>
+                    <span class="text-sm font-normal">/month</span>
                 </p>
                 <a href="{{ route('room-available', ['slug' => $boardingHouse->slug]) }}"
                     class="flex shrink-0 rounded-full py-[14px] px-5 bg-ngekos-orange font-bold text-white">Book

@@ -11,13 +11,13 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::controller(BoardingHouseController::class)->group(function () {
     Route::prefix('find-kos')->group(function () {
-        Route::get('/',  'index')->name('find-kos');
-        Route::post('/',  'store')->name('find-kos.store');
+        Route::get('/',  'find')->name('find-kos');
+        Route::post('/',  'findResult')->name('find-kos.result');
     });
 
     Route::prefix('details')->group(function () {
-        Route::get('/{slug}',  'show')->name('detail');
-        Route::get('/room-available/{slug}',  'room')->name('room-available');
+        Route::get('/{slug}',  'roomDetail')->name('room-detail');
+        Route::get('/room-available/{slug}',  'roomAvailable')->name('room-available');
     });
 });
 
@@ -28,11 +28,17 @@ Route::controller(BookingController::class)->group(function () {
     Route::post('/room-booking',   'roomBooking')
         ->name('room-booking');
 
+    Route::get('/room-booking',   'roomBookingDetail')
+        ->name('room-booking-detail');
+
     Route::post('/customer-booking',   'bookingDetail')
         ->name('customer-booking');
 
     Route::post('/checkout',   'checkout')
         ->name('checkout');
+
+    Route::get('/success',   'success')
+        ->name('success');
 });
 
 Route::get('/city/{slug}', [CityController::class, 'index'])

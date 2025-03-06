@@ -26,7 +26,7 @@
     </div>
     <section id="Result" class=" relative flex flex-col gap-4 px-5 mt-5 mb-9">
         @foreach ($boardingHouses as $boardingHouse)
-            <a href="{{ route('detail', ['slug' => $boardingHouse->slug]) }}" class="card">
+            <a href="{{ route('room-detail', ['slug' => $boardingHouse->slug]) }}" class="card">
                 <div
                     class="flex rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white hover:border-[#91BF77] transition-all duration-300">
                     <div class="flex w-[120px] h-[183px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
@@ -51,7 +51,7 @@
                         <hr class="border-[#F1F2F6]">
                         <p class="font-semibold text-lg text-ngekos-orange">Rp.
                             {{ number_format($boardingHouse->price, thousands_separator: '.') }}<span
-                                class="text-sm text-ngekos-grey font-normal">/bulan</span></p>
+                                class="text-sm text-ngekos-grey font-normal">/month</span></p>
                     </div>
                 </div>
             </a>
