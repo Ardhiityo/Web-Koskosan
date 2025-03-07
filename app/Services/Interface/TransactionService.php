@@ -16,4 +16,5 @@ interface TransactionService
     public function generateTransactionCode();
     public function totalAmountByPaymentMethod($paymentMethod);
     public function createTransaction($paymentMethod);
+    public function getTransactionByCode($code);
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CustomerBookingRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Services\Interface\CityService;
 use App\Services\Interface\RoomService;
 use App\Services\Interface\CategoryService;
+use App\Http\Requests\CustomerBookingRequest;
 use App\Services\Interface\TransactionService;
 use App\Services\Interface\BoardingHouseService;
 
@@ -26,18 +27,18 @@ class BookingController extends Controller
         return view('pages.check-booking');
     }
 
-    public function roomBooking(Request $request)
+    public function bookingRoomSave(Request $request)
     {
         $this->transactionRepository->savedDataToSession($request->all());
-        return redirect()->route('room-booking-detail');
+        return redirect()->route('booking-room');
     }
 
-    public function roomBookingDetail()
+    public function bookingRoom()
     {
         $transaction = $this->transactionRepository->getDataFromSession();
 
-        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseById($transaction['boardingHouse']);
-        $room = $this->roomRepository->getRoomById($transaction['room']);
+        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseById($transaction['boarding_house_id']);
+        $room = $this->roomRepository->getRoomById($transaction['room_id']);
 
         return view('pages.booking.room', compact('boardingHouse', 'room'));
     }
@@ -48,8 +49,8 @@ class BookingController extends Controller
 
         $transaction = $this->transactionRepository->getDataFromSession();
 
-        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseById($transaction['boardingHouse']);
-        $room = $this->roomRepository->getRoomById($transaction['room']);
+        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseById($transaction['boarding_house_id']);
+        $room = $this->roomRepository->getRoomById($transaction['room_id']);
         $subTotal = $this->transactionRepository->subTotal();
         $tax = $this->transactionRepository->tax();
         $insurance = $this->transactionRepository->insurance();
@@ -91,11 +92,12 @@ class BookingController extends Controller
         return redirect($paymentUrl);
     }
 
-    public function success()
+    public function success(Request $request)
     {
-        $order = $this->transactionRepository->getDataFromSession();
-        $boardingHouse = $this->boardingHouseRepository->getBoardingHouseById($order['boarding_house_id']);
-        $room = $this->roomRepository->getRoomById($order['room_id']);
-        return view('pages.booking.success', compact('order', 'boardingHouse', 'room'));
+        //butuh validasi apakah sudah success / belum
+        $order = $this->transactionRepository->getTransactionByCode($request->order_id);
+        if (!$order) return redirect()->route('home');
+
+        return view('pages.booking.success', compact('order'));
     }
 }

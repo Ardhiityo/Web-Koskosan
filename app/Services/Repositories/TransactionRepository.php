@@ -24,7 +24,7 @@ class TransactionRepository implements TransactionService
     public function subTotal()
     {
         $transaction = $this->getDataFromSession();
-        $room = $this->roomRepository->getRoomById($transaction['room']);
+        $room = $this->roomRepository->getRoomById($transaction['room_id']);
 
         return $transaction['duration'] * $room->price_per_month;
     }
@@ -70,11 +70,11 @@ class TransactionRepository implements TransactionService
 
         return Transaction::create([
             'code' => $this->generateTransactionCode(),
-            'boarding_house_id' => $transaction['boardingHouse'],
-            'room_id' => $transaction['room'],
+            'boarding_house_id' => $transaction['boarding_house_id'],
+            'room_id' => $transaction['room_id'],
             'name' => $transaction['name'],
             'email' => $transaction['email'],
-            'phone_number' => $transaction['phone'],
+            'phone_number' => $transaction['phone_number'],
             'payment_method' => $paymentMethod,
             'payment_status' => 'pending',
             'start_date' => $transaction['start_date'],
@@ -82,5 +82,10 @@ class TransactionRepository implements TransactionService
             'total_amount' => $this->totalAmountByPaymentMethod($paymentMethod),
             'transaction_date' => Date::now()->toDateString()
         ]);
+    }
+
+    public function getTransactionByCode($code)
+    {
+        return Transaction::where('code', $code)->first();
     }
 }

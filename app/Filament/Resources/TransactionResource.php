@@ -69,7 +69,8 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('code'),
+                TextColumn::make('code')
+                    ->searchable(),
                 TextColumn::make('name'),
                 TextColumn::make('payment_method'),
                 TextColumn::make('payment_status'),

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Room available')
+@section('title', 'Available room')
 
 @section('content')
     <div id="Background"
@@ -38,14 +38,14 @@
         </div>
     </div>
 
-    <form action="{{ route('room-booking') }}" class="relative flex flex-col gap-4 mt-5" method="POST">
+    <form action="{{ route('booking-room') }}" class="relative flex flex-col gap-4 mt-5" method="POST">
         @csrf
         <h2 class="font-bold px-5">Available Rooms</h2>
         <div id="RoomsContainer" class="flex flex-col gap-4 px-5">
-            <input type="hidden" name="boardingHouse" value="{{ $boardingHouse->id }}">
+            <input type="hidden" name="boarding_house_id" value="{{ $boardingHouse->id }}">
             @foreach ($boardingHouse->rooms as $room)
                 <label class="relative group">
-                    <input type="radio" name="room" class="absolute top-1/2 left-1/2 -z-10 opacity-0" required
+                    <input type="radio" name="room_id" class="absolute top-1/2 left-1/2 -z-10 opacity-0" required
                         value="{{ $room->id }}">
                     <div
                         class="flex rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white hover:border-[#91BF77] group-has-[:checked]:ring-2 group-has-[:checked]:ring-[#91BF77] transition-all duration-300">

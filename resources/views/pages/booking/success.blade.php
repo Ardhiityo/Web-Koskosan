@@ -11,49 +11,50 @@
             <div class="flex flex-col w-full rounded-[30px] border border-[#F1F2F6] p-4 gap-4 bg-white">
                 <div class="flex gap-4">
                     <div class="flex w-[120px] h-[132px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                        <img src="{{ asset('storage/' . $boardingHouse->thumbnail) }}" class="w-full h-full object-cover"
-                            alt="icon">
+                        <img src="{{ asset('storage/' . $order->boardingHouse->thumbnail) }}"
+                            class="w-full h-full object-cover" alt="icon">
                     </div>
                     <div class="flex flex-col gap-3 w-full">
-                        <p class="font-semibold text-lg leading-[27px] line-clamp-2 min-h-[54px]">{{ $boardingHouse->name }}
+                        <p class="font-semibold text-lg leading-[27px] line-clamp-2 min-h-[54px]">
+                            {{ $order->boardingHouse->name }}
                         </p>
                         <hr class="border-[#F1F2F6]">
                         <div class="flex items-center gap-[6px]">
                             <img src="{{ asset('assets/images/icons/location.svg') }}" class="w-5 h-5 flex shrink-0"
                                 alt="icon">
-                            <p class="text-sm text-ngekos-grey">{{ $boardingHouse->city->name }} City</p>
+                            <p class="text-sm text-ngekos-grey">{{ $order->boardingHouse->city->name }} City</p>
                         </div>
                         <div class="flex items-center gap-[6px]">
                             <img src="{{ asset('assets/images/icons/profile-2user.svg') }}" class="w-5 h-5 flex shrink-0"
                                 alt="icon">
-                            <p class="text-sm text-ngekos-grey">In {{ $boardingHouse->category->name }}</p>
+                            <p class="text-sm text-ngekos-grey">In {{ $order->boardingHouse->category->name }}</p>
                         </div>
                     </div>
                 </div>
                 <hr class="border-[#F1F2F6]">
                 <div class="flex gap-4">
                     <div class="flex w-[120px] h-[138px] shrink-0 rounded-[30px] bg-[#D9D9D9] overflow-hidden">
-                        <img src="{{ asset('storage/' . $room->roomImages->first()->image) }}"
+                        <img src="{{ asset('storage/' . $order->room->roomImages->first()->image) }}"
                             class="w-full h-full object-cover" alt="icon">
                     </div>
                     <div class="flex flex-col gap-3 w-full">
-                        <p class="font-semibold text-lg leading-[27px]">{{ $room->name }}</p>
+                        <p class="font-semibold text-lg leading-[27px]">{{ $order->room->name }}</p>
                         <hr class="border-[#F1F2F6]">
                         <div class="flex items-center gap-[6px]">
                             <img src="{{ asset('assets/images/icons/profile-2user.svg') }}" class="w-5 h-5 flex shrink-0"
                                 alt="icon">
-                            <p class="text-sm text-ngekos-grey">{{ $room->capacity }} People</p>
+                            <p class="text-sm text-ngekos-grey">{{ $order->room->capacity }} People</p>
                         </div>
                         <div class="flex items-center gap-[6px]">
                             <img src="{{ asset('assets/images/icons/3dcube.svg') }}" class="w-5 h-5 flex shrink-0"
                                 alt="icon">
-                            <p class="text-sm text-ngekos-grey">{{ $room->square_feet }} square feet</p>
+                            <p class="text-sm text-ngekos-grey">{{ $order->room->square_feet }} square feet</p>
                         </div>
                         <div class="flex items-center gap-[6px]">
                             <img src="{{ asset('assets/images/icons/calendar.svg') }}" class="w-5 h-5 flex shrink-0"
                                 alt="icon">
                             <p class="text-sm text-ngekos-grey">
-                                {{ \Carbon\Carbon::parse($order['transaction_date'])->translatedFormat('j F Y') }}</p>
+                                {{ \Carbon\Carbon::parse($order->transaction_date)->translatedFormat('j F Y') }}</p>
                         </div>
                     </div>
                 </div>

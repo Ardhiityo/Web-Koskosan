@@ -15,11 +15,11 @@ class CustomerBookingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'boardingHouse' => ['required', 'exists:boarding_houses,id'],
-            'room' => ['required', 'exists:rooms,id'],
+            'boarding_house_id' => ['required', 'exists:boarding_houses,id'],
+            'room_id' => ['required', 'exists:rooms,id'],
             'name' => ['required', 'min:3', 'max:35'],
             'email' => ['required', new EmailValidationRule],
-            'phone' => ['required', 'numeric', 'min_digits:10', 'max_digits:15'],
+            'phone_number' => ['required', 'numeric', 'min_digits:10', 'max_digits:15'],
             'duration' => ['required'],
             'start_date' => ['required']
         ];

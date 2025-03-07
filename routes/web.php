@@ -25,20 +25,20 @@ Route::controller(BookingController::class)->group(function () {
     Route::get('/check-booking', 'index')
         ->name('check-booking');
 
-    Route::post('/room-booking',   'roomBooking')
-        ->name('room-booking');
+    Route::post('/booking/room',   'bookingRoomSave')
+        ->name('booking-room-save');
 
-    Route::get('/room-booking',   'roomBookingDetail')
-        ->name('room-booking-detail');
+    Route::get('/booking/room',   'bookingRoom')
+        ->name('booking-room');
 
-    Route::post('/customer-booking',   'bookingDetail')
-        ->name('customer-booking');
+    Route::post('/booking/detail',   'bookingDetail')
+        ->name('booking-detail');
 
-    Route::post('/checkout',   'checkout')
-        ->name('checkout');
+    Route::post('/booking/checkout',   'checkout')
+        ->name('booking-checkout');
 
-    Route::get('/success',   'success')
-        ->name('success');
+    Route::get('/booking/success', 'success')
+        ->name('booking-success');
 });
 
 Route::get('/city/{slug}', [CityController::class, 'index'])

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Room booking')
+@section('title', 'Booking room')
 
 @section('content')
     <div id="Background"
@@ -63,11 +63,11 @@
             </div>
         </div>
     </div>
-    <form action="{{ route('customer-booking') }}" class="relative flex flex-col gap-6 mt-5 pt-5 bg-[#F5F6F8]"
+    <form action="{{ route('booking-detail') }}" class="relative flex flex-col gap-6 mt-5 pt-5 bg-[#F5F6F8]"
         method="POST">
         @csrf
-        <input type="hidden" name="boardingHouse" value="{{ $boardingHouse->id }}">
-        <input type="hidden" name="room" value="{{ $room->id }}">
+        <input type="hidden" name="boarding_house_id" value="{{ $boardingHouse->id }}">
+        <input type="hidden" name="room_id" value="{{ $room->id }}">
 
         <div class="flex flex-col gap-[6px] px-5">
             <h1 class="font-semibold text-lg">Your Informations</h1>
@@ -114,7 +114,7 @@
                     border-red
                     @enderror">
                     <img src="{{ asset('assets/images/icons/call.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
-                    <input type="tel" name="phone" value="{{ old('phone') }}"
+                    <input type="tel" name="phone_number" value="{{ old('phone_number') }}"
                         class="appearance-none outline-none w-full font-semibold placeholder:text-ngekos-grey placeholder:font-normal"
                         placeholder="Write your phone" required>
                 </label>

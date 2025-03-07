@@ -7,7 +7,7 @@
         class="absolute top-0 w-full h-[230px] rounded-b-[75px] bg-[linear-gradient(180deg,#F2F9E6_0%,#D2EDE4_100%)]">
     </div>
     <div id="TopNav" class="relative flex items-center justify-between px-5 mt-[60px]">
-        <a href="{{ route('room-booking') }}"
+        <a href="{{ route('booking-room') }}"
             class="w-12 h-12 flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-white">
             <img src="{{ asset('assets/images/icons/arrow-left.svg') }}" class="w-[28px] h-[28px]" alt="icon">
         </a>
@@ -93,7 +93,7 @@
                     <img src="{{ asset('assets/images/icons/call.svg') }}" class="w-6 h-6 flex shrink-0" alt="icon">
                     <p class="text-ngekos-grey">Phone</p>
                 </div>
-                <p class="font-semibold">{{ $transaction['phone'] }}</p>
+                <p class="font-semibold">{{ $transaction['phone_number'] }}</p>
             </div>
         </div>
     </div>
@@ -136,7 +136,7 @@
         </div>
     </div>
 
-    <form action="{{ route('checkout') }}" class="relative flex flex-col gap-6 mt-5 pt-5" method="POST">
+    <form action="{{ route('booking-checkout') }}" class="relative flex flex-col gap-6 mt-5 pt-5" method="POST">
         @csrf
         <div id="PaymentOptions" class="flex flex-col rounded-[30px] border border-[#F1F2F6] p-5 gap-4 mx-5">
             <div id="TabButton-Container" class="flex items-center justify-between border-b border-[#F1F2F6] gap-[18px]">
