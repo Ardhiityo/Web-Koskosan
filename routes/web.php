@@ -22,8 +22,8 @@ Route::controller(BoardingHouseController::class)->group(function () {
 });
 
 Route::controller(BookingController::class)->group(function () {
-    Route::get('/check-booking', 'index')
-        ->name('check-booking');
+    Route::get('/booking-check', 'index')
+        ->name('booking-check');
 
     Route::post('/booking/room',   'bookingRoomSave')
         ->name('booking-room-save');
@@ -39,6 +39,9 @@ Route::controller(BookingController::class)->group(function () {
 
     Route::get('/booking/success', 'success')
         ->name('booking-success');
+
+    Route::post('/booking/mybooking-detail', 'myBookingDetail')
+        ->name('booking-mybooking-detail');
 });
 
 Route::get('/city/{slug}', [CityController::class, 'index'])

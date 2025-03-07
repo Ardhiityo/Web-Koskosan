@@ -72,9 +72,16 @@
             <a href="{{ route('home') }}"
                 class="w-full rounded-full p-[14px_20px] text-center font-bold text-white bg-ngekos-orange">Explore Other
                 Kos</a>
-            <a href="booking-details.html"
+            <button onclick="document.getElementById('myBooking').submit()"
                 class="w-full rounded-full p-[14px_20px] text-center font-bold text-white bg-ngekos-black">View My
-                Booking</a>
+                Booking</button>
         </div>
     </div>
+
+    <form action="{{ route('booking-mybooking-detail') }}" method="post" id="myBooking">
+        @csrf
+        <input type="hidden" name="booking_code" value="{{ $order->code }}">
+        <input type="hidden" name="email" value="{{ $order->email }}">
+        <input type="hidden" name="phone" value="{{ $order->phone_number }}">
+    </form>
 @endsection

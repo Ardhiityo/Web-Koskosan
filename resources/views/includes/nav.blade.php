@@ -6,7 +6,7 @@
                         alt="icon">
                     <span class="font-semibold text-sm text-white">Discover</span>
                 </a>
-                <a href="{{ route('check-booking') }}" class="flex flex-col items-center text-center gap-2">
+                <a href="{{ route('booking-check') }}" class="flex flex-col items-center text-center gap-2">
                     <img src="{{ asset('assets/images/icons/note-favorite.svg') }}" class="w-8 h-8 flex shrink-0"
                         alt="icon">
                     <span class="font-semibold text-sm text-white">Orders</span>

@@ -8,6 +8,7 @@ use App\Services\Interface\CityService;
 use App\Services\Interface\RoomService;
 use App\Services\Interface\CategoryService;
 use App\Http\Requests\CustomerBookingRequest;
+use App\Http\Requests\MyBookingDetailRequest;
 use App\Services\Interface\TransactionService;
 use App\Services\Interface\BoardingHouseService;
 
@@ -94,10 +95,17 @@ class BookingController extends Controller
 
     public function success(Request $request)
     {
-        //butuh validasi apakah sudah success / belum
         $order = $this->transactionRepository->getTransactionByCode($request->order_id);
         if (!$order) return redirect()->route('home');
-
+        if ($order->payment_status !== 'paid') return redirect()->route('home');
         return view('pages.booking.success', compact('order'));
+    }
+
+    public function myBookingDetail(MyBookingDetailRequest $request)
+    {
+        $data = $request->validated();
+        $order = $this->transactionRepository->getTransactionByCode($data['booking_code']);
+
+        return view('pages.booking.my-booking', compact('order'));
     }
 }
