@@ -24,7 +24,7 @@
                             alt="icon">
                         <input type="text" name="booking_code" required
                             class="appearance-none outline-none w-full font-semibold placeholder:text-ngekos-grey placeholder:font-normal"
-                            placeholder="Write your booking code">
+                            placeholder="KOS123XXXXX" value="{{ old('booking_code') }}">
                     </label>
                     @error('booking_code')
                         <p class="text-sm text-ngekos-grey">{{ $message }}</p>
@@ -37,7 +37,7 @@
                         <img src="{{ asset('assets/images/icons/sms.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
                         <input type="email" name="email" required
                             class="appearance-none outline-none w-full font-semibold placeholder:text-ngekos-grey placeholder:font-normal"
-                            placeholder="Write your email">
+                            placeholder="example@gmail.com" value="{{ old('email') }}">
                     </label>
                     @error('email')
                         <p class="text-sm text-ngekos-grey">{{ $message }}</p>
@@ -48,9 +48,9 @@
                     <label
                         class="flex items-center w-full rounded-full p-[14px_20px] gap-3 bg-white ring-1 ring-[#F1F2F6] focus-within:ring-[#91BF77] transition-all duration-300">
                         <img src="{{ asset('assets/images/icons/call.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
-                        <input type="tel" name="phone" required
+                        <input type="text" name="phone"
                             class="appearance-none outline-none w-full font-semibold placeholder:text-ngekos-grey placeholder:font-normal"
-                            placeholder="Write your phone">
+                            placeholder="62xxxxxxxxxx" required minlength="10" maxlength="14" value="{{ old('phone') }}">
                     </label>
                     @error('phone')
                         <p class="text-sm text-ngekos-grey">{{ $message }}</p>

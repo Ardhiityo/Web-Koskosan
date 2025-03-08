@@ -9,8 +9,8 @@
 
     <div id="TopNav" class="relative flex items-center justify-between px-5 mt-[60px]">
         <div class="flex flex-col gap-1">
-            <p>Good day,</p>
-            <h1 class="font-bold text-xl leading-[30px]">Explore Cozy Home</h1>
+            <p>Your next perfect stay is just a click away,</p>
+            <h1 class="font-bold text-xl leading-[30px]">Explore, choose, and settle in with ease.</h1>
         </div>
         <a href="#" class="w-12 h-12 flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-white">
             <img src="{{ asset('assets/images/icons/notification.svg') }}" class="w-[28px] h-[28px]" alt="icon">
@@ -88,9 +88,12 @@
                                         </p>
                                     </div>
                                     <hr class="border-[#F1F2F6]">
-                                    <p class="font-semibold text-lg text-ngekos-orange">Rp.
-                                        {{ number_format(num: $popularBoardingHouse->price, thousands_separator: '.') }}<span
-                                            class="text-sm text-ngekos-grey font-normal">/month</span></p>
+                                    <p class="font-semibold text-lg text-ngekos-orange">
+                                        <span class="text-sm">Start from</span> <br>
+                                        Rp.
+                                        {{ number_format(num: $popularBoardingHouse->rooms->min('price_per_month'), thousands_separator: '.') }}<span
+                                            class="text-sm text-ngekos-grey font-normal">/month</span>
+                                    </p>
                                 </div>
                             </div>
                         </a>
@@ -169,9 +172,12 @@
                                     {{ $boardingHouse->rooms()->sum('capacity') }} People</p>
                             </div>
                             <hr class="border-[#F1F2F6]">
-                            <p class="font-semibold text-lg text-ngekos-orange">Rp.
-                                {{ number_format(num: $boardingHouse->price, thousands_separator: '.') }}<span
-                                    class="text-sm text-ngekos-grey font-normal">/month</span></p>
+                            <p class="font-semibold text-lg text-ngekos-orange">
+                                <span class="text-sm">Start from</span> <br>
+                                Rp.
+                                {{ number_format(num: $boardingHouse->rooms->min('price_per_month'), thousands_separator: '.') }}<span
+                                    class="text-sm text-ngekos-grey font-normal">/month</span>
+                            </p>
                         </div>
                     </div>
                 </a>

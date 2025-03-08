@@ -84,7 +84,7 @@
                         alt="icon">
                     <input type="text" name="name" value="{{ old('name') }}"
                         class="appearance-none outline-none w-full font-semibold placeholder:text-ngekos-grey placeholder:font-normal"
-                        placeholder="Write your name" required>
+                        placeholder="John doe" required>
                 </label>
                 @error('name')
                     <p class="text-sm text-ngekos-grey">{{ $message }}</p>
@@ -100,7 +100,7 @@
                     <img src="{{ asset('assets/images/icons/sms.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
                     <input type="email" name="email" value="{{ old('email') }}"
                         class="appearance-none outline-none w-full font-semibold placeholder:text-ngekos-grey placeholder:font-normal"
-                        placeholder="Write your email" required>
+                        placeholder="example@gmail.com" required>
                 </label>
                 @error('email')
                     <p class="text-sm text-ngekos-grey">{{ $message }}</p>
@@ -114,11 +114,11 @@
                     border-red
                     @enderror">
                     <img src="{{ asset('assets/images/icons/call.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
-                    <input type="tel" name="phone_number" value="{{ old('phone_number') }}"
+                    <input type="text" name="phone_number" value="{{ old('phone_number') }}"
                         class="appearance-none outline-none w-full font-semibold placeholder:text-ngekos-grey placeholder:font-normal"
-                        placeholder="Write your phone" required>
+                        placeholder="62xxxxxxxxxx" required minlength="10" maxlength="14">
                 </label>
-                @error('phone')
+                @error('phone_number')
                     <p class="text-sm text-ngekos-grey">{{ $message }}</p>
                 @enderror
             </div>

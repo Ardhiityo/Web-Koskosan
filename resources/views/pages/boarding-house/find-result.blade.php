@@ -45,9 +45,12 @@
                                 {{ $boardingHouse->rooms()->first()->capacity }} People</p>
                         </div>
                         <hr class="border-[#F1F2F6]">
-                        <p class="font-semibold text-lg text-ngekos-orange">Rp
-                            {{ number_format($boardingHouse->price, thousands_separator: '.') }}<span
-                                class="text-sm text-ngekos-grey font-normal">/month</span></p>
+                        <p class="font-semibold text-lg text-ngekos-orange">
+                            <span class="text-sm">Start from</span> <br>
+                            Rp
+                            {{ number_format($boardingHouse->rooms->min('price_per_month'), thousands_separator: '.') }}<span
+                                class="text-sm text-ngekos-grey font-normal">/month</span>
+                        </p>
                     </div>
                 </div>
             </a>

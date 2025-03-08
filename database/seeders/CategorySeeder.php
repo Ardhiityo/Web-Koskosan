@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
 {
@@ -12,6 +14,10 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Category::create([
+            'image' => 'assets/images/thumbnails/hotel.png',
+            'name' => 'Hotels',
+            'slug' => Str::slug('Hotels')
+        ]);
     }
 }

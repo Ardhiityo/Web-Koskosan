@@ -2,16 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TransactionResource\Pages;
-use App\Models\Transaction;
-use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use Date;
+use Carbon\Carbon;
+use App\Models\Room;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Get;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\Transaction;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\DatePicker;
+use App\Filament\Resources\TransactionResource\Pages;
 
 class TransactionResource extends Resource
 {
@@ -24,9 +28,15 @@ class TransactionResource extends Resource
         return $form
             ->schema([
                 TextInput::make('code')
-                    ->numeric()
+                    ->default(function () {
+                        return 'KOS' . strval(random_int(1000, 100000000));
+                    })
+                    ->readOnly()
                     ->required(),
                 DatePicker::make('transaction_date')
+                    ->default(function () {
+                        return Carbon::today();
+                    })
                     ->required(),
                 Select::make('boarding_house_id')
                     ->relationship('boardingHouse', 'name'),
@@ -35,8 +45,13 @@ class TransactionResource extends Resource
                 TextInput::make('name')
                     ->required(),
                 TextInput::make('email')
+                    ->email()
                     ->required(),
                 TextInput::make('phone_number')
+                    ->startsWith('62')
+                    ->default(function () {
+                        return '62';
+                    })
                     ->numeric()
                     ->required(),
                 Select::make('payment_method')
@@ -52,14 +67,30 @@ class TransactionResource extends Resource
                     ])
                     ->required(),
                 DatePicker::make('start_date')
+                    ->default(function () {
+                        return Carbon::today();
+                    })
                     ->required(),
                 TextInput::make('duration')
                     ->prefix('Month')
                     ->numeric()
-                    ->required(),
+                    ->required()
+                    ->reactive()
+                    ->afterStateUpdated(function ($state, callable $set, Get $get) {
+                        $room = Room::find($get('room_id'));
+                        if ($room) {
+                            $duration = $state;
+                            $subTotal = $room->price_per_month * $duration;
+                            $ppn = $subTotal * 0.11;
+                            $insurance = $subTotal * 0.01;
+                            $total_amount = $subTotal + $ppn + $insurance;
+                            $set('total_amount', $total_amount);
+                        }
+                    }),
                 TextInput::make('total_amount')
                     ->prefix('IDR')
                     ->numeric()
+                    ->readOnly()
                     ->required(),
 
             ]);
@@ -82,7 +113,9 @@ class TransactionResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

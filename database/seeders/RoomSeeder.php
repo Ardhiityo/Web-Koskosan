@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Room;
+use App\Models\BoardingHouse;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoomSeeder extends Seeder
 {
@@ -12,6 +14,16 @@ class RoomSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $boardingHouse = BoardingHouse::where('slug', 'amaris')->first();
+
+        Room::create([
+            'boarding_house_id' => $boardingHouse->id,
+            'name' => 'Family',
+            'room_type' => 'Extra large space',
+            'square_feet' => '30x40',
+            'capacity' => 5,
+            'price_per_month' => 550000,
+            'is_available' => true
+        ]);
     }
 }

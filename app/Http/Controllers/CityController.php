@@ -20,8 +20,6 @@ class CityController extends Controller
     {
         $boardingHouses = $this->boardingHouseRepository->getAllBoardingHouses(city: $request->city);
 
-        $averageRating = BoardingHouse::find($boardingHouses->first()->id)->testimonials()->avg('rating');
-
-        return view('pages.city.index', compact('boardingHouses', 'averageRating'));
+        return view('pages.city.index', compact('boardingHouses'));
     }
 }

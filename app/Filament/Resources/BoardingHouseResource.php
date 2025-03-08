@@ -15,7 +15,6 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
 use App\Filament\Resources\BoardingHouseResource\Pages;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\ImageColumn;
@@ -56,10 +55,6 @@ class BoardingHouseResource extends Resource
                                     ->required(),
                                 TextArea::make('description')
                                     ->required(),
-                                TextInput::make('price')
-                                    ->prefix('IDR')
-                                    ->required()
-                                    ->numeric(),
                                 Textarea::make('address')
                                     ->required(),
                             ]),
@@ -91,7 +86,6 @@ class BoardingHouseResource extends Resource
                                             ->numeric()
                                             ->required(),
                                         TextInput::make('square_feet')
-                                            ->numeric()
                                             ->required(),
                                         TextInput::make('price_per_month')
                                             ->numeric()
@@ -120,8 +114,6 @@ class BoardingHouseResource extends Resource
                 TextColumn::make('name'),
                 TextColumn::make('city.name'),
                 TextColumn::make('category.name'),
-                TextColumn::make('price')
-                    ->prefix('IDR '),
                 ImageColumn::make('thumbnail')
                     ->circular(),
             ])

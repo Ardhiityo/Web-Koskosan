@@ -130,9 +130,7 @@
                                         {{ \Carbon\Carbon::parse($boardingHouse->created_at)->translatedFormat('j F Y') }}
                                     </p>
                                 </div>
-                            </div>
-                            <p class="leading-[26px]">Enak banget ngekos di sini sampe lupa rumah emak saking nyamannya
-                                lol...</p>
+                            </div>{{ $testimonial->content }}</p>
                             <div class="flex">
                                 @for ($i = 1; $i <= $testimonial->rating; $i++)
                                     <img src="{{ asset('assets/images/icons/Star 1.svg') }}"
@@ -155,9 +153,9 @@
         <div class="fixed bottom-5 w-full max-w-[640px] px-5 z-10">
             <div class="flex items-center justify-between rounded-[40px] py-4 px-6 bg-ngekos-black">
                 <p class="font-bold text-xl leading-[30px] text-white">
-                    Rp. {{ number_format($boardingHouse->price, thousands_separator: '.') }}
-                    <br>
-                    <span class="text-sm font-normal">/month</span>
+                    <span class="text-sm">Start from</span> <br>
+                    Rp. {{ number_format($boardingHouse->rooms->min('price_per_month'), thousands_separator: '.') }} <span
+                        class="text-sm font-normal">/month</span>
                 </p>
                 <a href="{{ route('room-available', ['slug' => $boardingHouse->slug]) }}"
                     class="flex shrink-0 rounded-full py-[14px] px-5 bg-ngekos-orange font-bold text-white">Book

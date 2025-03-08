@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreignId('category_id')->constrained()
                 ->cascadeOnUpdate()->cascadeOnDelete();
             $table->longText('description');
-            $table->integer('price');
             $table->string('address');
             $table->timestamps();
         });

@@ -17,12 +17,20 @@
     <div id="Header" class="relative flex items-center justify-between gap-2 px-5 mt-[18px]">
         <div class="flex flex-col gap-[6px]">
             <h1 class="font-bold text-[32px] leading-[48px]">{{ $boardingHouses->first()->city->name }} City</h1>
-            <p class="text-ngekos-grey">Tersedia {{ $boardingHouses->count() }} Kos</p>
+            <p class="text-ngekos-grey">{{ $boardingHouses->count() }} Kos available</p>
         </div>
         <button class="flex flex-col items-center text-center shrink-0 rounded-[22px] p-[10px_20px] gap-2 bg-white">
             <img src="{{ asset('assets/images/icons/star.svg') }}" class="w-6 h-6" alt="icon">
             <p class="font-bold text-sm">
-                {{ number_format($averageRating, thousands_separator: '.') }}/5</p>
+                @php
+                    $boardingHouseRatings = [];
+                    foreach ($boardingHouses as $boardingHouse) {
+                        $boardingHouseRatings[] = $boardingHouse->testimonials->avg('rating');
+                    }
+                    $result = array_sum($boardingHouseRatings) / count($boardingHouseRatings);
+                @endphp
+                {{ floor($result) }}/5
+            </p>
         </button>
     </div>
     <section id="Result" class=" relative flex flex-col gap-4 px-5 mt-5 mb-9">
@@ -49,9 +57,12 @@
                             <p class="text-sm text-ngekos-grey">{{ $boardingHouse->rooms()->sum('capacity') }}People</p>
                         </div>
                         <hr class="border-[#F1F2F6]">
-                        <p class="font-semibold text-lg text-ngekos-orange">Rp.
-                            {{ number_format($boardingHouse->price, thousands_separator: '.') }}<span
-                                class="text-sm text-ngekos-grey font-normal">/month</span></p>
+                        <p class="font-semibold text-lg text-ngekos-orange">
+                            <span class="text-sm">Start from</span> <br>
+                            Rp.
+                            {{ number_format($boardingHouse->rooms->min('price_per_month'), thousands_separator: '.') }}<span
+                                class="text-sm text-ngekos-grey font-normal">/month</span>
+                        </p>
                     </div>
                 </div>
             </a>
