@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Services\Interface\CityService;
 use App\Services\Interface\RoomService;
 use App\Services\Interface\CategoryService;
@@ -25,7 +24,7 @@ class BookingController extends Controller
 
     public function index()
     {
-        return view('pages.check-booking');
+        return view(view: 'pages.check-booking');
     }
 
     public function bookingRoomSave(Request $request)
@@ -41,7 +40,10 @@ class BookingController extends Controller
         $boardingHouse = $this->boardingHouseRepository->getBoardingHouseById($transaction['boarding_house_id']);
         $room = $this->roomRepository->getRoomById($transaction['room_id']);
 
-        return view('pages.booking.room', compact('boardingHouse', 'room'));
+        return view(
+            view: 'pages.booking.room',
+            data: compact('boardingHouse', 'room')
+        );
     }
 
     public function bookingDetail(CustomerBookingRequest $request)
@@ -98,7 +100,10 @@ class BookingController extends Controller
         $order = $this->transactionRepository->getTransactionByCode($request->order_id);
         if (!$order) return redirect()->route('home');
         if ($order->payment_status !== 'paid') return redirect()->route('home');
-        return view('pages.booking.success', compact('order'));
+        return view(
+            view: 'pages.booking.success',
+            data: compact('order')
+        );
     }
 
     public function myBookingDetail(MyBookingDetailRequest $request)
@@ -106,6 +111,9 @@ class BookingController extends Controller
         $data = $request->validated();
         $order = $this->transactionRepository->getTransactionByCode($data['booking_code']);
 
-        return view('pages.booking.my-booking', compact('order'));
+        return view(
+            view: 'pages.booking.my-booking',
+            data: compact('order')
+        );
     }
 }

@@ -20,6 +20,9 @@ class CategoryController extends Controller
         $boardingHouses = $this->boardingHouseRepository
             ->getAllBoardingHouses(category: $request->category);
 
-        return view('pages.category.index', compact('boardingHouses'));
+        return view(
+            view: 'pages.category.index',
+            data: compact('boardingHouses')
+        );
     }
 }

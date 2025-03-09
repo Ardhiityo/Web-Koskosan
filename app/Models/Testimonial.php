@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\BoardingHouse;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Testimonial extends Model

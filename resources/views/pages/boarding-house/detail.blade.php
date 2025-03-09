@@ -11,11 +11,6 @@
             class="w-12 h-12 flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-white/10 backdrop-blur-sm">
             <img src="{{ asset('assets/images/icons/arrow-left-transparent.svg') }}" class="w-8 h-8" alt="icon">
         </a>
-        <p class="font-semibold text-white">Details</p>
-        <button
-            class="w-12 h-12 flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-white/10 backdrop-blur-sm">
-            <img src="{{ asset('assets/images/icons/like.svg') }}" class="w-[26px] h-[26px]" alt="">
-        </button>
     </div>
     <div id="Gallery" class="swiper-gallery w-full overflow-x-hidden -mb-[38px]">
         <div class="swiper-wrapper">

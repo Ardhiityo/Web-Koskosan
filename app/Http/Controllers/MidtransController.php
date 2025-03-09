@@ -76,6 +76,6 @@ class MidtransController extends Controller
                 break;
         }
 
-        return response(['message' => 'Callback received succesfully'], 200);
+        return response(content: ['message' => 'Callback received succesfully'], status: 200);
     }
 }

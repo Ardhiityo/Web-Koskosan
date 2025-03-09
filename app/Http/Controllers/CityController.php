@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\BoardingHouse;
 use App\Services\Interface\CityService;
 use App\Services\Interface\CategoryService;
 use App\Services\Interface\BoardingHouseService;
@@ -16,10 +15,32 @@ class CityController extends Controller
         private CityService $cityRepository
     ) {}
 
-    public function index(Request $request)
+    public function index()
+    {
+        $cities = $this->cityRepository->getAllCities();
+
+        foreach ($cities as $city) {
+            $averageRating = $city->boardingHouses()
+                ->with('testimonials')
+                ->get()
+                ->pluck('testimonials')
+                ->flatten()
+                ->avg('rating');
+        }
+
+        return view(
+            view: 'pages.city.index',
+            data: compact('cities', 'averageRating')
+        );
+    }
+
+    public function show(Request $request)
     {
         $boardingHouses = $this->boardingHouseRepository->getAllBoardingHouses(city: $request->city);
 
-        return view('pages.city.index', compact('boardingHouses'));
+        return view(
+            view: 'pages.city.show',
+            data: compact('boardingHouses')
+        );
     }
 }

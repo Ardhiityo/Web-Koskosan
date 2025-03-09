@@ -9,12 +9,9 @@
 
     <div id="TopNav" class="relative flex items-center justify-between px-5 mt-[60px]">
         <div class="flex flex-col gap-1">
-            <p>Your next perfect stay is just a click away,</p>
-            <h1 class="font-bold text-xl leading-[30px]">Explore, choose, and settle in with ease.</h1>
+            <p>Find your ideal stay in a click,</p>
+            <h1 class="font-bold text-xl leading-[30px]">Discover and settle easily.</h1>
         </div>
-        <a href="#" class="w-12 h-12 flex items-center justify-center shrink-0 rounded-full overflow-hidden bg-white">
-            <img src="{{ asset('assets/images/icons/notification.svg') }}" class="w-[28px] h-[28px]" alt="icon">
-        </a>
     </div>
 
     <div id="Categories" class="swiper w-full overflow-x-hidden mt-[30px]">
@@ -44,7 +41,7 @@
     <section id="Popular" class="flex flex-col gap-4">
         <div class="flex items-center justify-between px-5">
             <h2 class="font-bold">Popular Kos</h2>
-            <a href="#">
+            <a href="{{ route('popular') }}">
                 <div class="flex items-center gap-2">
                     <span>See all</span>
                     <img src="{{ asset('assets/images/icons/arrow-right.svg') }}" class="w-6 h-6 flex shrink-0"
@@ -100,14 +97,13 @@
                     </div>
                 @endforeach
 
-
             </div>
         </div>
     </section>
     <section id="Cities" class="flex flex-col p-5 gap-4 bg-[#F5F6F8] mt-[30px]">
         <div class="flex items-center justify-between">
             <h2 class="font-bold">Browse Cities</h2>
-            <a href="#">
+            <a href="{{ route('cities') }}">
                 <div class="flex items-center gap-2">
                     <span>See all</span>
                     <img src="{{ asset('assets/images/icons/arrow-right.svg') }}" class="w-6 h-6 flex shrink-0'"
@@ -138,8 +134,8 @@
     </section>
     <section id="Best" class="flex flex-col gap-4 px-5 mt-[30px]">
         <div class="flex items-center justify-between">
-            <h2 class="font-bold">All Great Koskos</h2>
-            <a href="#">
+            <h2 class="font-bold">All Great Koskosan</h2>
+            <a href="{{ route('all-boardingHouse') }}">
                 <div class="flex items-center gap-2">
                     <span>See all</span>
                     <img src="{{ asset('assets/images/icons/arrow-right.svg') }}" class="w-6 h-6 flex shrink-0"
