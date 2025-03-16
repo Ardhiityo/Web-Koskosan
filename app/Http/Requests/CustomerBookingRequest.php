@@ -28,7 +28,7 @@ class CustomerBookingRequest extends FormRequest
     public function messages()
     {
         return [
-            'starts_with:62' => 'The phone number field must start with following: 62.'
+            'phone_number.starts_with' => 'The phone number field must start with following: 62.'
         ];
     }
 }

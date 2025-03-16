@@ -110,7 +110,7 @@
                 <p class="font-semibold">Phone No</p>
                 <label
                     class="flex items-center w-full rounded-full p-[14px_20px] gap-3 bg-white focus-within:ring-1 focus-within:ring-[#91BF77] transition-all duration-300
-                    @error('name')
+                    @error('phone_number')
                     border-red
                     @enderror">
                     <img src="{{ asset('assets/images/icons/call.svg') }}" class="w-5 h-5 flex shrink-0" alt="icon">
