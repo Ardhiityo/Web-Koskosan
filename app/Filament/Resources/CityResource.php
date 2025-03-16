@@ -10,9 +10,9 @@ use Illuminate\Support\Str;
 use Filament\Resources\Resource;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\CityResource\Pages;
-use Filament\Tables\Columns\ImageColumn;
 
 class CityResource extends Resource
 {
@@ -31,6 +31,8 @@ class CityResource extends Resource
                         $set('slug', Str::slug($state));
                     }),
                 TextInput::make('slug')
+                    ->readOnly()
+                    ->unique(ignoreRecord: true)
                     ->required(),
                 FileUpload::make('image')
                     ->image()
@@ -56,7 +58,7 @@ class CityResource extends Resource
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

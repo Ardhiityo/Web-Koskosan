@@ -4,16 +4,18 @@ namespace App\Filament\Resources;
 
 use Filament\Tables;
 use Filament\Forms\Form;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Table;
 use App\Models\Testimonial;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
 use App\Filament\Resources\TestimonialResource\Pages;
-use Filament\Tables\Columns\TextColumn;
 
 class TestimonialResource extends Resource
 {
@@ -29,7 +31,7 @@ class TestimonialResource extends Resource
                     ->required(),
                 FileUpload::make('photo')
                     ->image()
-                    ->directory('testimonial')
+                    ->directory('testimonials')
                     ->required()
                     ->columnSpan(2),
                 Select::make('boarding_house_id')

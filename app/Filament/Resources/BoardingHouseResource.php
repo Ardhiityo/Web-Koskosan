@@ -45,7 +45,7 @@ class BoardingHouseResource extends Resource
                                     ->required(),
                                 FileUpload::make('thumbnail')
                                     ->image()
-                                    ->directory('thumbnail')
+                                    ->directory('thumbnails')
                                     ->required(),
                                 Select::make('city_id')
                                     ->relationship(name: 'city', titleAttribute: 'name')
