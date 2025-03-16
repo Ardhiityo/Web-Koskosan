@@ -46,6 +46,7 @@ class BoardingHouseResource extends Resource
                                 FileUpload::make('thumbnail')
                                     ->image()
                                     ->directory('thumbnails')
+                                    ->maxSize(1000)
                                     ->required(),
                                 Select::make('city_id')
                                     ->relationship(name: 'city', titleAttribute: 'name')
@@ -70,6 +71,7 @@ class BoardingHouseResource extends Resource
                                         FileUpload::make('image')
                                             ->image()
                                             ->directory('bonuses')
+                                            ->maxSize(1000)
                                             ->required(),
                                     ])
                             ]),
@@ -98,6 +100,7 @@ class BoardingHouseResource extends Resource
                                                 FileUpload::make('image')
                                                     ->image()
                                                     ->directory('room-images')
+                                                    ->maxSize(1000)
                                                     ->required(),
                                             ])
                                     ]),

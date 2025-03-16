@@ -32,10 +32,12 @@ class CategoryResource extends Resource
                         $set('slug', Str::slug($state));
                     }),
                 TextInput::make('slug')
+                    ->readOnly()
                     ->unique(ignoreRecord: true)
                     ->required(),
                 FileUpload::make('image')
                     ->image()
+                    ->maxSize(1000)
                     ->directory('categories')
                     ->required()
                     ->columnSpan(2),

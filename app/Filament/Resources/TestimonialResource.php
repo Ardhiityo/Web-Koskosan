@@ -10,8 +10,6 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
@@ -33,6 +31,7 @@ class TestimonialResource extends Resource
                     ->image()
                     ->directory('testimonials')
                     ->required()
+                    ->maxSize(1000)
                     ->columnSpan(2),
                 Select::make('boarding_house_id')
                     ->relationship('boardingHouse', 'name')

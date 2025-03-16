@@ -37,6 +37,7 @@ class CityResource extends Resource
                 FileUpload::make('image')
                     ->image()
                     ->directory('cities')
+                    ->maxSize(1000)
                     ->required()
                     ->columnSpan(2)
             ]);
