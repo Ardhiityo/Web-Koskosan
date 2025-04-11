@@ -9,6 +9,6 @@ class CategoryRepository implements CategoryService
 {
     public function getAllCategories()
     {
-        return Category::all();
+        return Category::with('boardingHouses')->get();
     }
 }

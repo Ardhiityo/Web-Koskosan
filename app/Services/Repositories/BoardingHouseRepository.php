@@ -10,7 +10,7 @@ class BoardingHouseRepository implements BoardingHouseService
 {
     function getAllBoardingHouses($search = null, $city = null, $category = null)
     {
-        $boardingHouses = BoardingHouse::query();
+        $boardingHouses = BoardingHouse::query()->with('city', 'rooms');
 
         if ($search) {
             $boardingHouses->where('name', 'like', '%' . $search . '%');
@@ -52,7 +52,7 @@ class BoardingHouseRepository implements BoardingHouseService
 
     function getPopularBoardingHouses($limit = 5)
     {
-        return BoardingHouse::withCount('transactions')
+        return BoardingHouse::with('city', 'category', 'rooms')->withCount('transactions')
             ->orderByDesc('transactions_count')->get();
     }
 

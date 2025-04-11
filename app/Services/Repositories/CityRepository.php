@@ -9,6 +9,6 @@ class CityRepository implements CityService
 {
     public function getAllCities()
     {
-        return City::all();
+        return City::with('boardingHouses')->get();
     }
 }
