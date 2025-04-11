@@ -48,7 +48,7 @@
             <div class="flex items-center gap-[6px]">
                 <img src="{{ asset('assets/images/icons/profile-2user.svg') }}" class="w-[26px] h-[26px] flex shrink-0"
                     alt="icon">
-                <p class="text-ngekos-grey">{{ $boardingHouse->rooms()->sum('capacity') }} People</p>
+                <p class="text-ngekos-grey">{{ $boardingHouse->rooms->sum('capacity') }} People</p>
             </div>
             <div class="flex items-center gap-[6px]">
                 <img src="{{ asset('assets/images/icons/shield-tick.svg') }}" class="w-[26px] h-[26px] flex shrink-0"

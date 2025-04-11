@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Interface\BoardingHouseService;
-use App\Services\Interface\CategoryService;
+use Illuminate\Support\Facades\Log;
 use App\Services\Interface\CityService;
+use App\Services\Interface\CategoryService;
+use App\Services\Interface\BoardingHouseService;
 
 class HomeController extends Controller
 {

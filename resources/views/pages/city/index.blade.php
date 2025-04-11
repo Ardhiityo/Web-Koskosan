@@ -46,7 +46,7 @@
                         <div class="flex items-center gap-[6px]">
                             <img src="{{ asset('assets/images/icons/3dcube.svg') }}" class="w-5 h-5 flex shrink-0"
                                 alt="icon">
-                            <p class="text-sm text-ngekos-grey">{{ $city->boardingHouses()->count() }} Boarding house</p>
+                            <p class="text-sm text-ngekos-grey">{{ $city->boardingHouses->count() }} Boarding house</p>
                         </div>
                     </div>
                 </div>

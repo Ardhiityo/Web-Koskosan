@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Services\Interface\CityService;
 use App\Services\Interface\RoomService;
 use App\Services\Interface\CategoryService;

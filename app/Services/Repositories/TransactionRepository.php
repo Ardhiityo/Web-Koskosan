@@ -86,6 +86,6 @@ class TransactionRepository implements TransactionService
 
     public function getTransactionByCode($code)
     {
-        return Transaction::where('code', $code)->first();
+        return Transaction::with(['boardingHouse' => ['city', 'category'], 'room'])->where('code', $code)->first();
     }
 }

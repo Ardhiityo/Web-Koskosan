@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\BoardingHouse;
 use App\Services\Interface\CityService;
 use App\Services\Interface\CategoryService;
 use App\Services\Interface\BoardingHouseService;
@@ -42,7 +41,7 @@ class BoardingHouseController extends Controller
     {
         $boardingHouse = $this->boardingHouseRepository->getBoardingHouseBySlug($slug);
 
-        $averageRating = BoardingHouse::find($boardingHouse->id)->testimonials()->avg('rating');
+        $averageRating = $boardingHouse->testimonials->avg('rating');
 
         return view('pages.boarding-house.detail', compact('boardingHouse', 'averageRating'));
     }

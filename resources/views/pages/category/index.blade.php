@@ -21,7 +21,22 @@
         </div>
         <button class="flex flex-col items-center text-center shrink-0 rounded-[22px] p-[10px_20px] gap-2 bg-white">
             <img src="{{ asset('assets/images/icons/star.svg') }}" class="w-6 h-6" alt="icon">
-            <p class="font-bold text-sm">4/5</p>
+            @php
+                $totalTestimonial = 0;
+                $totalRating = 0;
+                foreach ($boardingHouses as $boardingHouse) {
+                    if (!empty($boardingHouse->testimonials)) {
+                        $totalTestimonial += $boardingHouse->testimonials->count();
+                        $totalRating += $boardingHouse->testimonials->sum('rating');
+                    }
+                }
+                if ($totalRating && $totalTestimonial) {
+                    $finalRating = $totalRating / $totalTestimonial;
+                } else {
+                    $finalRating = 0;
+                }
+            @endphp
+            <p class="font-bold text-sm">{{ $finalRating }}/5</p>
         </button>
     </div>
     <section id="Result" class=" relative flex flex-col gap-4 px-5 mt-5 mb-9">
@@ -45,7 +60,7 @@
                         <div class="flex items-center gap-[6px]">
                             <img src="{{ asset('assets/images/icons/profile-2user.svg') }}" class="w-5 h-5 flex shrink-0"
                                 alt="icon">
-                            <p class="text-sm text-ngekos-grey">{{ $boardingHouse->rooms()->sum('capacity') }}
+                            <p class="text-sm text-ngekos-grey">{{ $boardingHouse->rooms->sum('capacity') }}
                                 People</p>
                         </div>
                         <hr class="border-[#F1F2F6]">
