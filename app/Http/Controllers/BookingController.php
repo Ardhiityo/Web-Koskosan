@@ -31,6 +31,7 @@ class BookingController extends Controller
     public function bookingRoomSave(Request $request)
     {
         $this->transactionRepository->savedDataToSession($request->all());
+
         return redirect()->route('booking-room');
     }
 

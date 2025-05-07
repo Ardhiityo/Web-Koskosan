@@ -47,14 +47,18 @@ class BoardingHouseRepository implements BoardingHouseService
 
     function getBoardingHouseBySlug($slug)
     {
-        return BoardingHouse::with([
-            'testimonials',
-            'category',
-            'rooms' => ['roomImages'],
-            'category',
-            'bonuses',
-            'city'
-        ])->where('slug',  'like',  '%' . $slug . '%')->first();
+        try {
+            return BoardingHouse::with([
+                'testimonials',
+                'category',
+                'rooms' => ['roomImages'],
+                'category',
+                'bonuses',
+                'city'
+            ])->where('slug',  'like',  '%' . $slug . '%')->firstOrFail();
+        } catch (\Throwable $th) {
+            return abort(404);
+        }
     }
 
     function getPopularBoardingHouses($limit = 5)
@@ -65,6 +69,10 @@ class BoardingHouseRepository implements BoardingHouseService
 
     function getBoardingHouseById($id)
     {
-        return BoardingHouse::with('city', 'category')->find($id);
+        try {
+            return BoardingHouse::with('city', 'category')->findOrFail($id);
+        } catch (\Throwable $th) {
+            return abort(404);
+        }
     }
 }

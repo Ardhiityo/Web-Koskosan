@@ -9,6 +9,10 @@ class RoomRepository implements RoomService
 {
     public function getRoomById($id)
     {
-        return Room::find($id);
+        try {
+            return Room::findOrFail($id);
+        } catch (\Throwable $th) {
+            return abort(404);
+        }
     }
 }
