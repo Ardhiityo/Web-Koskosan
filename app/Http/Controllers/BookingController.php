@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Midtrans\Snap;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use App\Services\Interface\CityService;
 use App\Services\Interface\RoomService;
 use App\Services\Interface\CategoryService;
@@ -72,7 +72,8 @@ class BookingController extends Controller
     {
         $order = $this->transactionRepository->createTransaction($request->payment_method);
 
-        \Midtrans\Config::$serverKey = config('midtrans.is_server_key');
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        \Midtrans\Config::$clientKey = config('midtrans.client_key');
         \Midtrans\Config::$isProduction = config('midtrans.is_production');
         \Midtrans\Config::$isSanitized = config('midtrans.is_sanitized');
         \Midtrans\Config::$is3ds = config('midtrans.is_3ds');
@@ -91,16 +92,24 @@ class BookingController extends Controller
             ]
         ];
 
-        $paymentUrl = \Midtrans\Snap::createTransaction($params)->redirect_url;
+        try {
+            $paymentUrl = Snap::getSnapToken($params);
 
-        return redirect($paymentUrl);
+            return response()->json([
+                'token' => $paymentUrl
+            ], 200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'error' => $th->getMessage()
+            ], 500);
+        }
     }
 
-    public function success(Request $request)
+    public function success()
     {
-        $order = $this->transactionRepository->getTransactionByCode($request->order_id);
-        if (!$order) return redirect()->route('home');
-        if ($order->payment_status !== 'paid') return redirect()->route('home');
+        $order = $this->transactionRepository
+            ->getTransactionByCode($this->transactionRepository->getDataFromSession()['code']);
+
         return view(
             view: 'pages.booking.success',
             data: compact('order')

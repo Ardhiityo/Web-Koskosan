@@ -136,13 +136,14 @@
         </div>
     </div>
 
-    <form action="{{ route('booking-checkout') }}" class="relative flex flex-col gap-6 mt-5 pt-5" method="POST">
+    <form action="{{ route('booking-checkout') }}" id="booking-checkout" class="relative flex flex-col gap-6 mt-5 pt-5"
+        method="POST">
         @csrf
         <div id="PaymentOptions" class="flex flex-col rounded-[30px] border border-[#F1F2F6] p-5 gap-4 mx-5">
             <div id="TabButton-Container" class="flex items-center justify-between border-b border-[#F1F2F6] gap-[18px]">
                 <label class="tab-link group relative flex flex-col justify-between gap-4"
                     data-target-tab="#DownPayment-Tab">
-                    <input type="radio" name="payment_method" value="down_payment"
+                    <input type="radio" name="payment_method" id="payment_method" value="down_payment"
                         class="absolute -z-10 top-1/2 left-1/2 opacity-0" checked>
                     <div class="flex items-center gap-3 mx-auto">
                         <div class="relative w-6 h-6">
@@ -303,4 +304,60 @@
 @section('scripts')
     <script src="{{ asset('js/app/accodion.js') }}"></script>
     <script src="{{ asset('js/app/checkout.js') }}"></script>
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
+    <script>
+        const form = document.getElementById('booking-checkout');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault()
+
+            let paymentMethod = null;
+            const selectedPayment = document.querySelector(
+                'input[name="payment_method"]:checked'
+            ).value;
+
+            if (selectedPayment === "down_payment") {
+                paymentMethod = "down_payment";
+            } else if (selectedPayment === "full_payment") {
+                paymentMethod = "full_payment";
+            }
+
+            try {
+                getSnapToken = await fetch('{{ route('booking-checkout') }}', {
+                    'method': 'POST',
+                    'headers': {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json '
+                    },
+                    'body': JSON.stringify({
+                        '_token': '{{ csrf_token() }}',
+                        'payment_method': paymentMethod
+                    })
+                });
+                const response = await getSnapToken.json();
+                handlePayment(response);
+            } catch (error) {
+                alert('Ups something wrong');
+            }
+        });
+
+        function handlePayment(result) {
+            if (result.token) {
+                snap.pay(result.token, {
+                    onSuccess: function(result) {
+                        window.location.href = '{{ route('booking-success') }}'
+                    },
+                    onPending: function(result) {
+                        alert('Payment Pending');
+                    },
+                    onError: function(result) {
+                        alert('Payment Error');
+                    }
+                });
+            } else {
+                alert('Ups, Try again later');
+            }
+        }
+    </script>
 @endsection

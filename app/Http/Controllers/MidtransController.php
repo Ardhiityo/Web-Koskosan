@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Twilio\Rest\Client;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class MidtransController extends Controller
 {
     public function callback(Request $request)
     {
-        $serverKey = config('midtrans.is_server_key');
+        $serverKey = config('midtrans.server_key');
+
         $hashedKey = hash(
             algo: 'sha512',
             data: $request->order_id . $request->status_code . $request->gross_amount . $serverKey
@@ -21,7 +23,6 @@ class MidtransController extends Controller
         }
 
         $transactionStatus = $request->transaction_status;
-
         $order_id = $request->order_id;
 
         $transaction = Transaction::where('code', $order_id)->first();
@@ -29,6 +30,8 @@ class MidtransController extends Controller
         if (!$transaction) {
             return response()->json(['message' => 'Transaction not found'], 404);
         }
+
+        Log::info($transaction, ['35']);
 
         $sid    = config('twilio.sid');
         $token  = config('twilio.token');
